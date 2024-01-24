@@ -69,3 +69,26 @@ Failed to parse /.../template-python/pyproject.toml
 then install and run `validate-pyproject pyproject.toml` and/or `pip3 install .` to check its syntax.
 
 To check for vulnerable dependencies, run `pip-audit`.
+
+## Releasing
+
+Ensure that `make lint` and `make test` work correctly and produce no further changes to code formatting before
+continuing.
+
+Releases tagged `latest` and targeted at development environments can be created from the `main` branch. Releases for
+installation in non-development environments should be created from a Git tag named using semantic versioning. For
+example, using
+
+* `git tag 1.2.3`
+* `git push --tags`
+
+Normally, Docker images will be built automatically after pushing to the UKEODHP repos. Images can also be created
+manually in the following way:
+
+* For versioned images create a git tag.
+* Log in to the Docker repository service. For the UKEODHP environment this can be achieved with the following command
+  ```AWS_ACCESS_KEY_ID=...  AWS_SECRET_ACCESS_KEY=... aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 312280911266.dkr.ecr.eu-west-2.amazonaws.com```
+  You will need to create an access key for a user with permission to modify ECR first.
+* Run `make dockerbuild` (for images tagged `latest`) or `make dockerbuild VERSION=1.2.3` for a release tagged `1.2.3`.
+  The image will be available locally within Docker after this step.
+* Run `make dockerpush` or `make dockerpush VERSION=1.2.3`. This will send the image to the ECR repository.
