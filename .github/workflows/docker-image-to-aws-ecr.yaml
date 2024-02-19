@@ -3,7 +3,7 @@ name: Publish Docker image to AWS ECR
 # CHANGEME
 # Add the following secrets to GitHub project (Settings > Secrets and variables > Actions > Repository Secrets):
 # - AWS_ACCOUNT_ID - 12-digit account ID e.g. 123456789012
-# - AWS_ECR - name of ECR public repository e.g. my-public-repository. Must already exist
+# - AWS_ECR - name of ECR public repository e.g. public.ecr.aws/abcd1234/my-public-repository
 # - AWS_REGION - region e.g. eu-west-1
 
 on:
