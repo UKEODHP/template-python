@@ -15,6 +15,26 @@ When using this template remember to:
 
 ## Getting started
 
+### Install via makefile
+
+```commandline
+make setup
+```
+
+This will create a virtual environment called `venv`, build `requirements.txt` and
+`requirements-dev.txt` from `pyproject.toml` if they're out of date, install the Python
+and Node dependencies and install `pre-commit`.
+
+It's safe and fast to run `make setup` repeatedly as it will only update these things if
+they have changed.
+
+After `make setup` you can run `pre-commit` to run pre-commit checks on staged changes and
+`pre-commit run --all-files` to run them on all files. This replicates the linter checks that
+run from GitHub actions.
+
+
+### Alternative installation
+
 You will need Python 3.11. On Debian you may need:
 * `sudo add-apt-repository -y 'deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu focal main'` (or `jammy` in place of `focal` for later Debian)
 * `sudo apt update`
